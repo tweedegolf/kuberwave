@@ -1,0 +1,22 @@
+[package]
+name = "kuberwave"
+description = "generate Kubernetes configurations from the commandline"
+version = "0.1.0"
+authors = ["Wouter Geraedts <wouter@tweedegolf.com>", "Marlon Baeten <marlon@tweedegolf.com>"]
+edition = "2018"
+
+[dependencies]
+failure = "0.1"
+clap = "2.34"
+serde = "1.0"
+serde_derive = "1.0"
+serde_yaml = "0.9"
+serde_json = "1.0"
+yaml-rust = "0.4"
+askama = "0.12"
+tera = "1.19"
+base64 = "0.13"
+ansible-vault = "0.2"
+slugify = "0.1.0"
+itertools = "0.12"
+tempfile = "3.2"

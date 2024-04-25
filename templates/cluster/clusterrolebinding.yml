@@ -1,0 +1,21 @@
+kind: "ClusterRoleBinding"
+apiVersion: "rbac.authorization.k8s.io/v1"
+metadata:
+  name: "{{ name }}"
+  labels:
+    kuberwave: "true"
+subjects:
+{%- for username in usernames %}
+  - kind: {{kind}}
+    name: "{{ username }}"
+{%- if kind == UserKind::ServiceAccount %}
+    namespace: default
+    apiGroup: ""
+{%- else %}
+    apiGroup: rbac.authorization.k8s.io
+{% endif -%}
+{%- endfor -%}
+roleRef:
+  kind: ClusterRole
+  name: "{{ rolename }}"
+  apiGroup: ""

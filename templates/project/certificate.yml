@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ name }}
+  {% if resource_version.is_some() %}resourceVersion: "{{ resource_version.unwrap() }}"{% endif %}
+spec:
+  secretName: {{ name }}
+  issuerRef:
+    name: {{ issuer }}
+    kind: ClusterIssuer
+  commonName: {{ hostnames[0] }}
+  dnsNames:
+    {% for hostname in hostnames %}
+    - {{ hostname }}
+    {% endfor %}

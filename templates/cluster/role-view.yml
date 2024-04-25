@@ -1,0 +1,72 @@
+kind: "ClusterRole"
+apiVersion: "rbac.authorization.k8s.io/v1"
+metadata:
+  name: "kuberwave-view"
+rules:
+  - apiGroups: ["cert-manager.io"]
+    resources:
+    - certificates
+    - certificaterequests
+    - issuers
+    verbs: ["get", "watch", "list"]
+  - apiGroups: [""]
+    resources:
+    - configmaps
+    - endpoints
+    - persistentvolumeclaims
+    - pods
+    - replicationcontrollers
+    - replicationcontrollers/scale
+    - serviceaccounts
+    - services
+    - bindings
+    - events
+    - limitranges
+    - namespaces/status
+    - pods/log
+    - pods/status
+    - replicationcontrollers/status
+    - resourcequotas
+    - resourcequotas/status
+    - namespaces
+    verbs: ["get", "watch", "list"]
+  - apiGroups: ["apps"]
+    resources:
+    - daemonsets
+    - deployments
+    - deployments/scale
+    - replicasets
+    - replicasets/scale
+    - statefulsets
+    - statefulsets/scale
+    - controllerrevisions
+    verbs: ["get", "watch", "list"]
+  - apiGroups: ["autoscaling"]
+    resources:
+    - horizontalpodautoscalers
+    verbs: ["get", "watch", "list"]
+  - apiGroups: ["batch"]
+    resources:
+    - cronjobs
+    - jobs
+    verbs: ["get", "watch", "list"]
+  - apiGroups: ["extensions"]
+    resources:
+    - daemonsets
+    - deployments
+    - deployments/scale
+    - ingresses
+    - networkpolicies
+    - replicasets
+    - replicasets/scale
+    - replicationcontrollers/scale
+    verbs: ["get", "watch", "list"]
+  - apiGroups: ["policy"]
+    resources:
+    - poddisruptionbudgets
+    verbs: ["get", "watch", "list"]
+  - apiGroups: ["networking.k8s.io"]
+    resources:
+    - networkpolicies
+    - ingresses
+    verbs: ["get", "watch", "list"]

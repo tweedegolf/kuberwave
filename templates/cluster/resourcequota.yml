@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  namespace: "{{ namespace }}"
+  name: "{{ name }}"
+  labels:
+    kuberwave: "true"
+spec:
+  hard:
+    count/ingresses.extensions: "{{ ingresses }}"
+    count/jobs.batch: "{{ jobs }}"
+    pods: "{{ pods }}"
+    services: "{{ services }}"
+    limits.cpu: "{{ cpu }}"
+    limits.memory: "{{ memory }}"

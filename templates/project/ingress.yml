@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ name }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    {% for annotation in annotations %}
+    {{ annotation.key }}: {{ annotation.value }}
+    {% endfor %}
+spec:
+  rules:
+    {% for host in hosts %}
+    - host: {{ host.name }}
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ host.service.name }}
+                port:
+                  number: {{ host.service.port }}
+    {% endfor %}
+  tls:
+    - secretName: {{ certificate }}
+      hosts:
+        {% for host in hosts %}
+        - {{ host.name }}
+        {% endfor %}
