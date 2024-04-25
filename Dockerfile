@@ -9,7 +9,6 @@ RUN curl -s -L https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key a
     && echo "deb http://packages.cloud.google.com/apt cloud-sdk-stretch main" > /etc/apt/sources.list.d/google-cloud-sdk.list \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        google-cloud-sdk \
         kubectl \
     && rm -rf /var/lib/apt/lists/*
 # install age
