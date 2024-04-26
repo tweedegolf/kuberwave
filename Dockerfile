@@ -23,6 +23,6 @@ ENV SOPS_VERSION=3.8.1
 RUN curl -s -L https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux -o /usr/local/bin/sops \
     && chmod 0755 /usr/local/bin/sops
 # copy executable
-COPY --from=builder /app/target/release/kuberwave /app/kuberwave
+COPY --from=builder /app/target/release/kuberwave /usr/local/bin/kuberwave
 # run kuberwave
-CMD ["/app/kuberwave"]
+CMD ["/usr/local/bin/kuberwave"]
