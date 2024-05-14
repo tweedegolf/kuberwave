@@ -1,9 +1,6 @@
-FROM ghcr.io/tweedegolf/rust-dev:stable AS builder
-WORKDIR /app
-COPY . /app
-RUN cargo build --release
-
 FROM ghcr.io/tweedegolf/debian:bookworm
+
+ARG TARGETARCH
 
 # install kubectl
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
@@ -25,7 +22,9 @@ RUN curl -s -L https://github.com/FiloSottile/age/releases/download/v${AGE_VERSI
 ENV SOPS_VERSION=3.8.1
 RUN curl -s -L https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux -o /usr/local/bin/sops \
     && chmod 0755 /usr/local/bin/sops
+
 # copy executable
-COPY --from=builder /app/target/release/kuberwave /usr/local/bin/kuberwave
+COPY target/kuberwave.$TARGETARCH /usr/local/bin/kuberwave
+
 # run kuberwave
 CMD ["/usr/local/bin/kuberwave"]
