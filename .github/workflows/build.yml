@@ -61,6 +61,7 @@ jobs:
           pull: true
           push: true
           platforms: linux/amd64,linux/arm64
+          context: .
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.tag }}
