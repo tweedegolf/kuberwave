@@ -25,6 +25,7 @@ RUN curl -s -L https://github.com/getsops/sops/releases/download/v${SOPS_VERSION
 
 # copy executable
 COPY kuberwave.$TARGETARCH /usr/local/bin/kuberwave
+RUN chmod 0755 /usr/local/bin/kuberwave
 
 # run kuberwave
 CMD ["/usr/local/bin/kuberwave"]
