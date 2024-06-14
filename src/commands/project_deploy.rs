@@ -1,7 +1,11 @@
+use std::env;
+
 use crate::commands::{compute_project_files, load_manifest, ProjectOpts};
 use crate::error::{ErrorKind, Result};
 use crate::project::types::EncryptionType;
 use crate::util;
+
+pub(crate) const DEPLOY_TOKEN_NAME: &str = "DEPLOY_TOKEN"; 
 
 pub fn exec(
     opts: ProjectOpts,
@@ -21,7 +25,13 @@ pub fn exec(
             )
             .context(ErrorKind::TokenError)?,
         ),
-        None => None,
+        None => {
+            if let Some(token) = env::var(DEPLOY_TOKEN_NAME).ok() {
+                Some(token)
+            } else {
+                None
+            }
+        }
     };
 
     let loaded_manifest = load_manifest(&opts)?;
