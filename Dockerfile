@@ -12,7 +12,7 @@ RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -
 
 # install age
 ENV AGE_VERSION=1.2.0
-RUN curl -s -L https://github.com/FiloSottile/age/releases/download/v${AGE_VERSION}/age-v${AGE_VERSION}-linux-amd64.tar.gz -o /tmp/age.tar.gz \
+RUN curl -s -L https://github.com/FiloSottile/age/releases/download/v${AGE_VERSION}/age-v${AGE_VERSION}-linux-${TARGETARCH}.tar.gz -o /tmp/age.tar.gz \
     && tar xvf /tmp/age.tar.gz -C /tmp \
     && mv /tmp/age/age /usr/local/bin/age \
     && mv /tmp/age/age-keygen /usr/local/bin/age-keygen \
@@ -20,7 +20,7 @@ RUN curl -s -L https://github.com/FiloSottile/age/releases/download/v${AGE_VERSI
 
 # install sops
 ENV SOPS_VERSION=3.9.0
-RUN curl -s -L https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux -o /usr/local/bin/sops \
+RUN curl -s -L https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.${TARGETARCH} -o /usr/local/bin/sops \
     && chmod 0755 /usr/local/bin/sops
 
 # copy executable
